@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+@theme {
+  --color-primary: #111111;
+  --color-white: #ffffff;
+  --color-gold: #c89b3c;
+  --color-gray: #f8f8f8;
+  --color-text: #555555;
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Poppins', sans-serif;
+  --font-button: 'Inter', sans-serif;
+  --font-cursive: 'Great Vibes', cursive;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-white);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom Swiper Styles */
+.hero-swiper .swiper-pagination-bullet {
+  background-color: var(--color-white);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+.hero-swiper .swiper-pagination-bullet-active {
+  background-color: var(--color-gold);
+  opacity: 1;
+  transform: scale(1.2);
+}
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+  color: var(--color-white);
+  transition: all 0.3s ease;
+}
+.hero-swiper .swiper-button-next:hover,
+.hero-swiper .swiper-button-prev:hover {
+  color: var(--color-gold);
+  transform: scale(1.1);
+}
+
+@layer base {
+  button {
+    font-family: var(--font-button);
+  }
+}

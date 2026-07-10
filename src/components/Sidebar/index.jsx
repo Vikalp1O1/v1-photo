@@ -10,7 +10,7 @@ const navLinks = [
   { id: 'photo-gallery', path: '/photo-gallery', label: 'PHOTO GALLERY', isAnchor: false },
   { id: 'video-gallery', path: '/video-gallery', label: 'VIDEO GALLERY', isAnchor: false },
   { id: 'team', path: '/team', label: 'MEET THE TEAM', isAnchor: false },
-  { id: 'contact', path: '/#contact', label: 'GET IN TOUCH', isAnchor: true },
+  { id: 'contact', path: '/contact', label: 'GET IN TOUCH', isAnchor: false },
 ];
 
 const Sidebar = ({ isOpen, toggleSidebar, setIsOpen }) => {

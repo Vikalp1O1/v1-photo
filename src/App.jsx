@@ -12,6 +12,7 @@ const PhotoGalleryDetails = lazy(() => import('@/pages/PhotoGalleryDetails'))
 const VideoGallery = lazy(() => import('@/pages/VideoGallery'))
 const VideoGalleryDetails = lazy(() => import('@/pages/VideoGalleryDetails'))
 const Team = lazy(() => import('@/pages/Team'))
+const Contact = lazy(() => import('@/pages/Contact'))
 function App() {
   return (
     <div className="min-h-screen bg-white text-text selection:bg-gold selection:text-white">
@@ -27,6 +28,7 @@ function App() {
             <Route path="video-gallery" element={<VideoGallery />} />
             <Route path="video-gallery/:id" element={<VideoGalleryDetails />} />
             <Route path="team" element={<Team />} />
+            <Route path="contact" element={<Contact />} />
           </Route>
         </Routes>
       </Suspense>

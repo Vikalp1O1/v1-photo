@@ -26,7 +26,6 @@ const Home = () => {
       <section id="awesome-shoots" className="w-full">
         <AwesomeShoots />
       </section>
-
     </div>
   )
 }

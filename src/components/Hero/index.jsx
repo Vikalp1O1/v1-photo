@@ -2,39 +2,42 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination, Navigation } from 'swiper/modules';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import useApi from '@/hooks/useApi';
+import { bannerApi } from '@/lib/endpoints';
+import { resolveImageSrc, PLACEHOLDER_IMAGE } from '@/lib/helpers';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-const heroSlides = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-    title: 'The Himalayas',
-    subtitle: 'Breathtaking peaks & valleys.',
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-    title: 'Tropical Beach',
-    subtitle: 'Golden sands & ocean waves.',
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-    title: 'Elegance & Grace',
-    subtitle: 'A beautiful bride on her special day.',
-  }
-];
-
 const Hero = () => {
+  const { data: banners, loading } = useApi(() => bannerApi.list());
+
+  // Loading skeleton
+  if (loading) {
+    return (
+      <section className="relative h-[70vh] w-full bg-gray-100 animate-pulse" />
+    );
+  }
+
+  // Fallback if no banners from API
+  const slides = banners?.length
+    ? banners.map((b) => ({
+        _id: b._id,
+        image: resolveImageSrc(b.image, PLACEHOLDER_IMAGE),
+        title: b.title,
+        subtitle: b.subtitle || '',
+      }))
+    : [];
+
+  if (slides.length === 0) return null;
+
   return (
     <section id="home" className="relative h-[70vh] w-full group">
       <Swiper
         modules={[Autoplay, EffectFade, Pagination, Navigation]}
         effect="fade"
-        loop={true}
+        loop={slides.length > 1}
         speed={1500}
         autoplay={{
           delay: 5000,
@@ -49,8 +52,8 @@ const Hero = () => {
         }}
         className="hero-swiper h-[70vh] w-full"
       >
-        {heroSlides.map((slide) => (
-          <SwiperSlide key={slide.id}>
+        {slides.map((slide) => (
+          <SwiperSlide key={slide._id}>
             <div className="relative h-full w-full bg-gray-100">
               {/* Image */}
               <img

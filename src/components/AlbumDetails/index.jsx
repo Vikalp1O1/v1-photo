@@ -1,11 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiMapPin, FiArrowLeft } from 'react-icons/fi';
 import LightboxGallery from '@/components/LightboxGallery';
 
-const AlbumDetails = ({ album, backPath }) => {
+const AlbumDetails = ({ album, backPath, hasMore, onLoadMore }) => {
   const navigate = useNavigate();
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  const observerTarget = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          onLoadMore && onLoadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [hasMore, onLoadMore]);
 
   const closeLightbox = () => setSelectedPhotoIndex(null);
 
@@ -51,6 +73,17 @@ const AlbumDetails = ({ album, backPath }) => {
               />
             </div>
           ))}
+          {/* Infinite Scroll Target & Skeletons */}
+          {hasMore && (
+            <>
+              <div ref={observerTarget} className="w-full aspect-[4/3] bg-gray-200 animate-pulse shadow-sm flex items-center justify-center">
+                <span className="text-gray-400 font-button text-[10px] tracking-widest uppercase">Loading...</span>
+              </div>
+              <div className="w-full aspect-[4/3] bg-gray-200 animate-pulse shadow-sm hidden sm:block"></div>
+              <div className="w-full aspect-[4/3] bg-gray-200 animate-pulse shadow-sm hidden md:block"></div>
+              <div className="w-full aspect-[4/3] bg-gray-200 animate-pulse shadow-sm hidden lg:block"></div>
+            </>
+          )}
           
         </div>
       </div>

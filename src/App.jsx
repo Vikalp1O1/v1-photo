@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
+import ScrollToTop from '@/components/ScrollToTop'
 
 // Lazy load the pages
 const Home = lazy(() => import('@/pages/Home'))
@@ -17,16 +18,17 @@ function App() {
   return (
     <div className="min-h-screen bg-white text-text selection:bg-gold selection:text-white">
       <Suspense fallback={<div className="flex h-screen items-center justify-center font-button text-sm tracking-widest text-primary uppercase">Loading...</div>}>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
             <Route path="weddings" element={<Weddings />} />
-            <Route path="weddings/:id" element={<WeddingDetails />} />
+            <Route path="weddings/:slug" element={<WeddingDetails />} />
             <Route path="photo-gallery" element={<PhotoGallery />} />
-            <Route path="photo-gallery/:id" element={<PhotoGalleryDetails />} />
+            <Route path="photo-gallery/:slug" element={<PhotoGalleryDetails />} />
             <Route path="video-gallery" element={<VideoGallery />} />
-            <Route path="video-gallery/:id" element={<VideoGalleryDetails />} />
+            <Route path="video-gallery/:slug" element={<VideoGalleryDetails />} />
             <Route path="team" element={<Team />} />
             <Route path="contact" element={<Contact />} />
           </Route>

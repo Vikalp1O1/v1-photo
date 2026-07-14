@@ -22,7 +22,6 @@ const AlbumSlider = ({ albums, basePath }) => {
           1440: { slidesPerView: 4 },
         }}
         freeMode={true}
-        mousewheel={true}
         navigation={{
           nextEl: '.album-next',
           prevEl: '.album-prev',
@@ -60,10 +59,10 @@ const AlbumSlider = ({ albums, basePath }) => {
 
       {/* Custom Navigation Arrows (Bottom Right) */}
       <div className="absolute bottom-8 right-8 flex gap-2 z-20">
-        <div className="album-prev rounded-xs flex h-10 w-12 cursor-pointer items-center justify-center bg-black/50 text-white backdrop-blur-sm transition-all duration-300 hover:bg-slate-800 opacity-0 hover:!opacity-100 shadow-xl group-hover:opacity-100">
+        <div className="album-prev rounded-xs flex h-10 w-12 cursor-pointer items-center justify-center bg-black/50 text-white backdrop-blur-sm transition-all duration-300 hover:bg-slate-800 opacity-70 hover:opacity-100 shadow-xl">
           <FiChevronLeft className="text-xl" />
         </div>
-        <div className="album-next rounded-xs flex h-10 w-12 cursor-pointer items-center justify-center bg-black/50 text-white backdrop-blur-sm transition-all duration-300 hover:bg-slate-800 opacity-0 hover:!opacity-100 shadow-xl group-hover:opacity-100">
+        <div className="album-next rounded-xs flex h-10 w-12 cursor-pointer items-center justify-center bg-black/50 text-white backdrop-blur-sm transition-all duration-300 hover:bg-slate-800 opacity-70 hover:opacity-100 shadow-xl">
           <FiChevronRight className="text-xl" />
         </div>
       </div>
